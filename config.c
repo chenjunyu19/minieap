@@ -132,13 +132,13 @@ static void parse_one_opt(const char* option, const char* argument) {
     } else if (ISOPT("password")) {
         COPY_N_ARG_TO(g_eap_config.password, PASSWORD_MAX_LEN);
     } else if (ISOPT("nic")) {
-        COPY_N_ARG_TO(g_prog_config.ifname, IFNAMSIZ);
+        COPY_N_ARG_TO(g_prog_config.ifname, IFNAMSIZ - 1);
     } else if (ISOPT("daemonize")) {
         g_prog_config.daemon_type = atoi(argument) % 4;
     } else if (ISOPT("pkt-plugin") || ISOPT("module")) {
         insert_data(&g_prog_config.packet_plugin_list, (void*)argument);
     } else if (ISOPT("if-impl")) {
-        COPY_N_ARG_TO(g_prog_config.if_impl, IFNAMSIZ);
+        COPY_N_ARG_TO(g_prog_config.if_impl, IFNAMSIZ - 1);
     } else if (ISOPT("save")) {
         g_prog_config.save_now = 1;
     } else if (ISOPT("help")) {
@@ -160,7 +160,7 @@ static void parse_one_opt(const char* option, const char* argument) {
             g_prog_config.kill_type = KILL_AND_START; /* 结束其他实例，本实例继续运行 */
     } else if (ISOPT("proxy-lan-iface")) {
         g_proxy_config.proxy_on = 1;
-        COPY_N_ARG_TO(g_proxy_config.lan_ifname, IFNAMSIZ);
+        COPY_N_ARG_TO(g_proxy_config.lan_ifname, IFNAMSIZ - 1);
     } else if (ISOPT("auth-round")) {
         g_prog_config.auth_round = atoi(argument);
     } else if (ISOPT("pid-file")) {
