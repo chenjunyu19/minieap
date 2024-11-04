@@ -65,10 +65,7 @@ RESULT parse_cmdline_conf_file(int argc, char* argv[]) {
                 PR_ERR("--conf-file必须有一个参数");
                 return FAILURE;
             } else {
-                int _len = strnlen(argv[i + 1], MAX_PATH);
-                g_prog_config.conffile = (char*)malloc(_len + 1);
-                strncpy(g_prog_config.conffile, argv[i + 1], _len);
-                g_prog_config.conffile[_len] = '\0';
+                g_prog_config.conffile = strndup(argv[i + 1], MAX_PATH);
             }
         }
     }
